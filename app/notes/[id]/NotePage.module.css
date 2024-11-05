@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  width: 100svw;
+  height: 100svh;
+  background-color: #393939;
+}
+
+.not-editing {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.not-editing button {
+  width: 130px;
+  cursor: pointer;
+}
+
+.editing {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.editing input textarea {
+  border: none;
+}
+
+.title {
+  font-size: 56px;
+}
+
+.content {
+  font-size: 24px;
+}

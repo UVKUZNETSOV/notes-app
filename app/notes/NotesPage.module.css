@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  width: 100svw;
+  height: 100svh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #393939;
+  gap: 20px;
+}
+
+.filter-buttons {
+  display: flex; 
+  gap: 10px;
+}
+
+.button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 100px;
+}
+
+.delete-button {
+  background-color: #838383;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.note-list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.note-item {
+  border: 1px solid #fff;
+  border-radius: 20px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
