@@ -41,5 +41,13 @@
   padding: 15px 20px;
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  width: 350px;
+  justify-content: space-between;
+}
+
+.note-content {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }

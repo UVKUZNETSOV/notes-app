@@ -105,7 +105,7 @@ const Home = () => {
       <ul className={styles["note-list"]}>
         {notes.map((note) => (
           <li className={styles["note-item"]} key={note.id}>
-            <div className="">
+            <div className={styles["note-content"]}>
               <h3 onClick={() => handleNoteClick(note.id)}>{note.title}</h3>
               <p>{note.content}</p>
               <small>
