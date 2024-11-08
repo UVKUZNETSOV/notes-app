@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setNotes,
@@ -19,6 +20,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.notes.filteredNotes);
   const router = useRouter();
+  const [activeFilter, setActiveFilter] = useState("all");
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -77,44 +79,73 @@ const Home = () => {
     router.push(`/notes/${id}`);
   };
 
-  return (
-    <div className={styles.container}>
-      <h1>Список заметок</h1>
+  const handleFilterClick = (filterType) => {
+    setActiveFilter(filterType);
+    switch (filterType) {
+      case "week":
+        dispatch(filterByWeek());
+        break;
+      case "month":
+        dispatch(filterByMonth());
+        break;
+      default:
+        dispatch(clearFilter());
+        break;
+    }
+  };
 
-      <div className={styles["filter-buttons"]}>
+  return (
+    <div className="container mt-4">
+      <h1 className="mb-4 text-light ">Список заметок</h1>
+
+      <div className="d-flex justify-content-between mb-3">
         <button
-          className={styles.button}
-          onClick={() => dispatch(filterByWeek())}
+          className={`btn ${
+            activeFilter === "week" ? styles.active : "btn-primary"
+          }`}
+          onClick={() => handleFilterClick("week")}
         >
           За неделю
         </button>
         <button
-          className={styles.button}
-          onClick={() => dispatch(filterByMonth())}
+          className={`btn ${
+            activeFilter === "month" ? styles.active : "btn-primary"
+          }`}
+          onClick={() => handleFilterClick("month")}
         >
           За месяц
         </button>
         <button
-          className={styles.button}
-          onClick={() => dispatch(clearFilter())}
+          className={`btn ${
+            activeFilter === "all" ? styles.active : "btn-secondary"
+          }`}
+          onClick={() => handleFilterClick("all")}
         >
           Сбросить фильтр
         </button>
       </div>
 
-      <ul className={styles["note-list"]}>
+      <ul
+        className="list-group overflow-auto"
+        style={{ maxHeight: "400px", gap: "10px" }}
+      >
         {notes.map((note) => (
-          <li className={styles["note-item"]} key={note.id}>
-            <div className={styles["note-content"]}>
-              <h3 onClick={() => handleNoteClick(note.id)}>{note.title}</h3>
-              <p>{note.content}</p>
-              <small>
+          <li
+            className="list-group-item d-flex justify-content-between align-items-start rounded-3 border bg-dark text-light"
+            key={note.id}
+            style={{ marginBottom: "10px" }}
+          >
+            <div className="flex-grow-1">
+              <h5 className="mb-1" onClick={() => handleNoteClick(note.id)}>
+                {note.title}
+              </h5>
+              <p className="mb-1">{note.content}</p>
+              <small className="text-light">
                 Дата создания: {new Date(note.created_at).toLocaleDateString()}
               </small>
             </div>
-
             <button
-              className={styles["delete-button"]}
+              className="btn btn-danger btn-sm ml-2"
               onClick={() => handleDeleteNote(note.id)}
             >
               Удалить
@@ -123,7 +154,7 @@ const Home = () => {
         ))}
       </ul>
 
-      <button className={styles.button} onClick={handleAddNote}>
+      <button className="btn btn-success mt-3" onClick={handleAddNote}>
         Добавить заметку
       </button>
     </div>

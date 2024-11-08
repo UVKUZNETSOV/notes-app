@@ -4,9 +4,11 @@ import React from "react";
 
 import Typewriter from "typewriter-effect";
 
+import styles from "./TypeWritter.module.css"
+
 const WelcomeWritter = () => {
   return (
-    <div>
+    <div className={styles.title}>
       <Typewriter
         onInit={(typewriter) => {
           typewriter
